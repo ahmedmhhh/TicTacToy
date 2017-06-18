@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -114,5 +115,35 @@ class MainActivity : AppCompatActivity() {
             else
                 Toast.makeText(this,"Player 2 win the game",Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun AutoPlay(){
+        val emptyCells=ArrayList<Int>()
+        for(cellID in 1..9){
+            if(!(Player1.contains(cellID)||Player2.contains(cellID))){
+                emptyCells.add(cellID)
+            }
+        }
+
+        val r=Random()
+        val randomIndex=r.nextInt(emptyCells.size-0)+0
+        val cellID=emptyCells[randomIndex]
+
+        val buSelected:Button?
+        when(cellID){
+            1->buSelected=bu1
+            2->buSelected=bu2
+            3->buSelected=bu3
+            4->buSelected=bu4
+            5->buSelected=bu5
+            6->buSelected=bu6
+            7->buSelected=bu7
+            8->buSelected=bu8
+            9->buSelected=bu9
+            else->{
+                buSelected=bu1
+            }
+        }
+        PlayGame(cellID,buSelected)
     }
 }
